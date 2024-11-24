@@ -1,6 +1,6 @@
 from django.db import models
 
-class Bookes(models.Model):
+class Book(models.Model):
     title=models.CharField(max_length=30)
     author=models.CharField(max_length=30)
     publication_year=models.DateField()
