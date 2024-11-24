@@ -6,6 +6,8 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from django.shortcuts import get_object_or_404 
 from rest_framework import status
+from rest_framework.decorators import api_view
+import random
 class BookAPIView(APIView):
     serializer_class = BookSerialzer
 
@@ -65,6 +67,31 @@ class BookAPIView(APIView):
             return Response({"error": "Book not found"}, status=status.HTTP_404_NOT_FOUND)
         except Exception as e:
                 return Response({"error": str(e)}, status=status.HTTP_400_BAD_REQUEST)
+
+@api_view(['GET'])
+def book_recommendations(request):
+    try:
+       
+        books = Book.objects.all()
+        if books and len(books)>1:
+            books=random.choice(books)
+        serializer = BookSerialzer(books, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)   
+    except Book.DoesNotExist:
+        return Response({"detail": "No books found."}, status=status.HTTP_404_NOT_FOUND)
+
+@api_view(['POST'])
+def mark_favorite(request):
+    try:
+        book_id=request.data.get('book_id')
+        book = Book.objects.get(pk=book_id)
+        book.is_favorite=True
+        book.save()
+        return Response({"message": "Book Marked as favorite"}, status=status.HTTP_200_OK)
+    except Book.DoesNotExist:
+        return Response({"detail": "Book not found."}, status=status.HTTP_404_NOT_FOUND)
+
+
 
 
 
