@@ -1,5 +1,5 @@
- <html>
- <head>
+<html>
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Books</title>
@@ -70,39 +70,73 @@
         .favorite-button:hover {
             background-color: #218838;
         }
+
+        .auth-buttons {
+            margin-bottom: 20px;
+        }
     </style>
 </head>
-        
-        <body>
-            <h1>Welcome to My Simple Book Collections  Django Server!</h1>
-            <br/>
-            <h2>
-            This is a simple template for the user interface, but it is recommended to use Postman for a more 
-            comprehensive API testing experience. 
-            The default browsable API interface may not fully support certain requests, like PUT.
-            </h2>
-             <p>
-                  To perform CRUD operations,       
-                    <a href="/books/">click here</a>  You can also use the following endpoints with the provided Django REST API:
+<body>
+    <h1>Welcome to My Simple Book Collections Django Server!</h1>
 
-            </p>
-            <p>
-                   <strong> End points </strong>
-                      <br/>
-                    GET /books: Fetch all books.<br/>
-                    POST /books: Add a new book.<br/>
-                    PUT /books/:id: Update an existing book by ID.<br/>
-                    DELETE /books/:id: Remove a book by ID.
-                    Favorite Books:
+    <div class="auth-buttons">
+        <a href="/accounts/login/">Login</a> | 
+        <a href="/accounts/register/">Signup</a>
+    </div>
 
-            </p>
+    <h2>
+        Before performing any action, please create an account and obtain a token by following the instructions below.
+        You can use the following endpoints to interact with the API:
+    </h2>
 
-             <form method='POST' action= "{% url 'book-list' %}">
-              {% csrf_token %} 
-             <button type='submit'> add book </button>
+    <h3>Steps to Get a Token</h3>
+    <ol>
+        <li>Sign up for an account by clicking <a href="/accounts/register/">here</a>.</li>
+        <li>Log in with your credentials by clicking <a href="/accounts/login/">here</a>.</li>
+        <li>To obtain a token, send a POST request to the following endpoint:
+            <br><code>POST /api/token/</code>
+            <br>Use your username and password in the body of the request to get the access and refresh tokens.
+        </li>
+        <li>To refresh your token, use the following endpoint:
+            <br><code>POST /api/token/refresh/</code>
+        </li>
+    </ol>
 
-             </form>
-             <h1>Books List</h1>
+    <h3>Protected Endpoints</h3>
+    <p>To access protected endpoints like adding, updating, or deleting books, you'll need to include your JWT token in the request headers. Follow the steps below to set the token:</p>
+
+    <h4>Steps to Use ModHeader for Authentication:</h4>
+    <ol>
+        <li>Install the <a href="https://chrome.google.com/webstore/detail/modheader" target="_blank">ModHeader Chrome Extension</a>.</li>
+        <li>Once installed, open ModHeader and click "Add new header".</li>
+        <li>Set the header name to <strong>Authorization</strong> and the value to <strong>Bearer YOUR_TOKEN_HERE</strong>, where <strong>YOUR_TOKEN_HERE</strong> is the token you received from the token endpoint.</li>
+        <li>Now you can make requests to the protected endpoints (e.g., POST, PUT, DELETE) with your token.</li>
+    </ol>
+
+    <h2>
+        This is a simple template for the user interface, but it is recommended to use Postman for a more 
+        comprehensive API testing experience. The default browsable API interface may not fully support certain requests, like PUT.
+    </h2>
+    <p>
+        To perform CRUD operations,       
+        <a href="/books/">click here</a>  You can also use the following endpoints with the provided Django REST API:
+    </p>
+    <p>
+        <strong>End points:</strong>
+        <br/>
+        GET /books: Fetch all books.<br/>
+        POST /books: Add a new book.<br/>
+        PUT /books/:id: Update an existing book by ID.<br/>
+        DELETE /books/:id: Remove a book by ID.<br/>
+        Favorite Books:
+    </p>
+
+    <form method='POST' action="{% url 'book-list' %}">
+        {% csrf_token %}
+        <button type='submit'>Add Book</button>
+    </form>
+
+    <h1>Books List</h1>
     {% if books %}
     <table>
         <thead>
@@ -137,9 +171,10 @@
     {% else %}
     <p>No books found.</p>
     {% endif %}
-            <ul>
-                <li><a href="/books/">Books</a></li>
-                 <li><a href="/books/recommendations">Recommendations</a></li>
-            </ul>
-        </body>
-    </html>
+    <ul>
+        <li><a href="/books/">Books</a></li>
+        <li><a href="/books/recommendations">Recommendations</a></li>
+    </ul>
+
+</body>
+</html>

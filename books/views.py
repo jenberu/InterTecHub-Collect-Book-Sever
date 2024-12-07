@@ -8,6 +8,7 @@ from django.shortcuts import get_object_or_404 ,render
 from rest_framework import status
 from rest_framework.decorators import api_view
 import random
+from rest_framework.permissions import IsAuthenticated
 from django.http import HttpResponse
 
 def home(request):
@@ -21,7 +22,7 @@ def home(request):
 
 class BookAPIView(APIView):
     serializer_class = BookSerialzer
-
+    permission_classes=[IsAuthenticated]
     def get(self, request,pk=None):
         try:
             if pk:

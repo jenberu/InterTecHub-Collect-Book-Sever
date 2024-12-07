@@ -30,15 +30,7 @@ class UserViewSet(viewsets.ModelViewSet):
             return obj
         except Http404:
             raise Http404("User with this public ID does not exist.")
-class UserProfileView(APIView)  :
-    permission_classes = [IsAuthenticated]
-    def get(self,request,pk=None):
-       
-        try:
-            user=request.user
-            return Response(UserSerializer(user).data) 
-        except User.DoesNotExist:   
-            return Response({"detail":"User not found"},status=status.HTTP_404_NOT_FOUND) 
+ 
 class RegisterViewSet(viewsets.ViewSet):
     serializer_class = RegisterSerializer
     permission_classes = [AllowAny]
@@ -90,18 +82,6 @@ class LoginViewSet(viewsets.ViewSet):
             raise InvalidToken(e.args[0])
         
         return Response(serializer.validated_data,status=status.HTTP_200_OK)   
-
-class RefreshViewSet(viewsets.ViewSet, TokenRefreshView):
-    permission_classes = (AllowAny,)
-    http_method_names = ['post']
-    def create(self, request, *args, **kwargs):
-        serializer = self.get_serializer(data=request.data)
-
-        try:
-            serializer.is_valid(raise_exception=True)
-        except TokenError as e:
-            raise InvalidToken(e.args[0])
-        return Response(serializer.validated_data,status=status.HTTP_200_OK)
 
 class LogoutView(APIView):
     permission_classes=(IsAuthenticated,)

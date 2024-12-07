@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'books',
     'rest_framework',
+    'rest_framework.authtoken',
     'accounts',
 ]
 
@@ -57,11 +58,13 @@ AUTH_USER_MODEL='accounts.User'
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework_simplejwt.authentication.JWTAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
     ],
-    'DEFAULT_PERMISSION_CLASSES': [
+    'DEFAULT_PERMISSION_CLASSES': (
         'rest_framework.permissions.AllowAny',
-    ],
+    ),
 }
+
 
 ROOT_URLCONF = 'book_collection.urls'
 
