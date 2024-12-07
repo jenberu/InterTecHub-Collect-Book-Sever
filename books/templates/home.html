@@ -94,20 +94,24 @@
         <li>Sign up for an account by clicking <a href="/accounts/register/">here</a>.</li>
         <li>Log in with your credentials by clicking <a href="/accounts/login/">here</a>.</li>
         <li>To obtain a token, send a POST request to the following endpoint:
-            <br><code>POST /api/token/</code>
+            <br><code>  <strong>POST /api/token/  </strong></code>
             <br>Use your username and password in the body of the request to get the access and refresh tokens.
         </li>
         <li>To refresh your token, use the following endpoint:
-            <br><code>POST /api/token/refresh/</code>
+            <br><code>  <strong>POST /api/token/refresh/  </strong></code>
         </li>
+        <li>Copy the access token  from the response and use them to make authenticated requests to the API endpoints.</li>
+    <p>For more info, visit the GitHub repository: 
+    <a href="https://github.com/jenberu/InterTecHub-Collect-Book-Sever" target="_blank">InterTecHub Collect Book Server</a>
+</p>
     </ol>
-
+     
     <h3>Protected Endpoints</h3>
     <p>To access protected endpoints like adding, updating, or deleting books, you'll need to include your JWT token in the request headers. Follow the steps below to set the token:</p>
 
     <h4>Steps to Use ModHeader for Authentication:</h4>
     <ol>
-        <li>Install the <a href="https://chrome.google.com/webstore/detail/modheader" target="_blank">ModHeader Chrome Extension</a>.</li>
+        <li>Install the <a href="https://chromewebstore.google.com/detail/modheader-modify-http-hea/idgpnmonknjnojddfkpgkljpfnnfcklj?hl=en" target="_blank">ModHeader Chrome Extension</a>.</li>
         <li>Once installed, open ModHeader and click "Add new header".</li>
         <li>Set the header name to <strong>Authorization</strong> and the value to <strong>Bearer YOUR_TOKEN_HERE</strong>, where <strong>YOUR_TOKEN_HERE</strong> is the token you received from the token endpoint.</li>
         <li>Now you can make requests to the protected endpoints (e.g., POST, PUT, DELETE) with your token.</li>
