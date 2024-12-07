@@ -5,8 +5,11 @@
     <title>Books</title>
     <style>
         body {
+            align-items:center;
             font-family: Arial, sans-serif;
-            margin: 20px;
+            margin: 20px auto;
+            padding:20px;
+           
         }
 
         table {
@@ -74,6 +77,12 @@
         .auth-buttons {
             margin-bottom: 20px;
         }
+        .footer {
+            margin-top: 20px;
+            text-align: center;
+            font-size: 14px;
+            color: #666;
+        }
     </style>
 </head>
 <body>
@@ -88,7 +97,26 @@
         Before performing any action, please create an account and obtain a token by following the instructions below.
         You can use the following endpoints to interact with the API:
     </h2>
+  <h2>Role-Based Access Control (RBAC)</h2>
+    <p>Our system implements RBAC to provide secure and controlled access to API endpoints based on user roles. Currently, we support the following roles:</p>
+    <ul>
+        <li><strong>Admin:</strong> Can access and manage all books and users.</li>
+        <li><strong>User:</strong> Can view, add, and mark books as favorites.</li>
+    </ul>
 
+    <h3>Admin-Only Features:</h3>
+    <ul>
+        <li><strong>GET /books/all:</strong> Admins can fetch a list of all books in the system.</li>
+        <li><strong>PUT /books/:id:</strong> Admins can update any book in the collection.</li>
+        <li><strong>DELETE /books/:id:</strong> Admins can delete any book in the collection.</li>
+    </ul>
+
+    <h3>User Features:</h3>
+    <ul>
+        <li><strong>GET /books:</strong> Users can fetch a personalized list of books (e.g., favorite books).</li>
+        <li><strong>POST /books:</strong> Users can add new books to the system.</li>
+        <li><strong>POST /books/favorite:</strong> Users can mark books as favorites.</li>
+    </ul>
     <h3>Steps to Get a Token</h3>
     <ol>
         <li>Sign up for an account by clicking <a href="/accounts/register/">here</a>.</li>
@@ -179,6 +207,8 @@
         <li><a href="/books/">Books</a></li>
         <li><a href="/books/recommendations">Recommendations</a></li>
     </ul>
-
+<div class="footer">
+        <p>Developed by Jemberu Kassie</p>
+    </div>
 </body>
 </html>
