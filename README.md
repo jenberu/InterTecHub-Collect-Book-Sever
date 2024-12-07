@@ -79,8 +79,7 @@ Include the access token in the Authorization header for secure endpoints
 
 Authorization: Bearer <your_access_token>
 
-ModHeader (Optional for Testing)
-
+https://chromewebstore.google.com/detail/modheader-modify-http-hea/idgpnmonknjnojddfkpgkljpfnnfcklj?hl=en
 Install ModHeader Extension.
 
 Add Authorization: Bearer <your_access_token> as a header for your requests.
